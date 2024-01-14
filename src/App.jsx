@@ -1,11 +1,16 @@
-import './App.css'
+// React router Dom library
+import { Routes, Route } from "react-router-dom";
+
+// Pages routes
+import Signup from "./Pages/Signup";
 
 function App() {
 
   return (
     <>
-      <h1>mahesh</h1>
-      <button>add</button>
+      <Routes>
+        <Route path="/" element={<Signup />}></Route>
+      </Routes>
     </>
   )
 }

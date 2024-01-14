@@ -1,0 +1,37 @@
+
+.NavBar{
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.NavBar a {
+    color: #8ea6bb;
+    font-weight: 500;
+    text-decoration: none !important;
+    opacity: 0.8;
+}
+
+.NavBar a:hover{
+    color: var(--white);
+    transition: all 0.3s;
+    opacity: 1;
+}
+
+.NavBar .active{
+    color: var(--white);
+    opacity: 1;
+}
+
+.gradient{
+    position: absolute;
+    width: 800px;
+    height: 150px;
+    margin: auto;
+    background: var(--blue);
+    filter: blur(100px);
+    z-index: -1;
+    top: -100px;
+}
