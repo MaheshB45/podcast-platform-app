@@ -21,7 +21,7 @@
 }
 
 .NavBar .active{
-    color: var(--white);
+    color: var(--white) !important;
     opacity: 1;
 }
 
