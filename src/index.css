@@ -20,3 +20,20 @@ body {
 input {
   font-family: "Inter", sans-serif;
 }
+
+.input-wrapper {
+  width: 70vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 1.8rem;
+}
+
+.input-wrapper h1 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
