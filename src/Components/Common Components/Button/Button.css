@@ -12,6 +12,7 @@
     font-weight: 500;
 }
 
+
 .custom-btn:hover {
     background-color: var(--white);
     color: var(--theme);
