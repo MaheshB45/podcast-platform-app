@@ -13,7 +13,7 @@ const NavBar = () => {
         <NavLink to="/podcasts" className={currentPath == "/podcasts" ? "active" : ""}>
          Podcasts
         </NavLink>
-        <NavLink to="/start-a-podcast" className={currentPath == "/start-a-podcast" ? "active" : ""}>
+        <NavLink to="/create-a-podcast" className={currentPath == "/create-a-podcast" ? "active" : ""}>
          Start A Podcast
         </NavLink>
         <NavLink to="/profile" className={currentPath == "/profile" ? "active" : ""}>

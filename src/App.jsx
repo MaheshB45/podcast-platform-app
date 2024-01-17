@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 // Pages routes
 import SignUpPage from "./Pages/SignUpPage";
 import Profile from "./Pages/Profile";
+import CreateAPodcast from "./Pages/CreateAPodcast";
 
 //React Toastify
 import { ToastContainer } from "react-toastify";
@@ -61,6 +62,7 @@ function App() {
         <Route path="/" element={<SignUpPage />} />
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
+          <Route path="/create-a-podcast" element={<CreateAPodcast />} />
         </Route>
       </Routes>
     </>
