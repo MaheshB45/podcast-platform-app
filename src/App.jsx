@@ -7,6 +7,7 @@ import Profile from "./Pages/Profile";
 import CreateAPodcast from "./Pages/CreateAPodcast";
 import PodcastsPage from "./Pages/Podcasts";
 import PodcastDetailsPage from "./Pages/PodcastDetails";
+import CreateAnEpisodePage from "./Pages/CreateAnEpisode";
 
 //React Toastify
 import { ToastContainer } from "react-toastify";
@@ -67,6 +68,7 @@ function App() {
           <Route path="/create-a-podcast" element={<CreateAPodcast />} />
           <Route path="/podcasts" element={<PodcastsPage />} />
           <Route path="/podcast/:id" element={<PodcastDetailsPage />} />
+          <Route path="/podcast/:id/create-an-episode" element={<CreateAnEpisodePage />} />
         </Route>
       </Routes>
     </>
