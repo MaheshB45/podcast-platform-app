@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from "react-router-dom";
-import NavBar from "../Components/Common Components/Navbar/NavBar";
 import { useEffect, useState } from "react";
 import {
   collection,
@@ -10,14 +9,17 @@ import {
 } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { toast } from "react-toastify";
+import NavBar from "../Components/Common Components/Navbar/NavBar";
 import Button from "../Components/Common Components/Button/Button";
 import EpisodeDetails from "../Components/Podcasts/EpisodeDetails/EpisodeDetails";
+import AudioPlayer from "../Components/Podcasts/AudioPlayer/AudioPlayer";
 
 const PodcastDetailsPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [podcast, setPodcast] = useState({});
   const [episodes, setEpisodes] = useState([]);
+  const [playingFile, setPlayingFile] = useState("");
 
   console.log("ID", id);
   useEffect(() => {
@@ -106,7 +108,7 @@ const PodcastDetailsPage = () => {
                   title={episode.title}
                   description={episode.description}
                   audioFile={episode.audioFile}
-                  onClick={(file) => console.log("Playing file" + file)}
+                  onClick={(file) => setPlayingFile(file)}
                 />
               ))
             ) : (
@@ -115,6 +117,7 @@ const PodcastDetailsPage = () => {
           </>
         )}
       </div>
+      {playingFile && <AudioPlayer audioSrc={playingFile} image={podcast.displayImg} />}
     </div>
   );
 };
