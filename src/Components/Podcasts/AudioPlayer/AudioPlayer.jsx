@@ -1,18 +1,20 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./AudioPlayer.css";
 //react-icons
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute } from "react-icons";
 
 // eslint-disable-next-line react/prop-types
 const AudioPlayer = ({ audioSrc, image }) => {
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isMute, setIsMute] = useState(false);
   const [duration, setDuration] = useState("");
+  const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(1);
   const audioRef = useRef();
 
   const handleDuration = (e) => {
-    setDuration(e.target.value);
+    setCurrentTime(e.target.value);
+    audioRef.current.currentTime = e.target.value;
   };
 
   const togglePlay = () => {
@@ -33,27 +35,84 @@ const AudioPlayer = ({ audioSrc, image }) => {
 
   const handleVolume = (e) => {
     setVolume(e.target.value);
+    audioRef.current.volume = e.target.value;
   };
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  }
+
+  useEffect(()=>{
+    const audio = audioRef.current;
+    audio.addEventListener("timeupdate", handleTimeUpdate);
+    audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+    audio.addEventListener("ended", handleEnded);
+
+    return () => {
+        audio.removeEventListener("timeupdate", handleTimeUpdate);
+        audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+        audio.removeEventListener("ended", handleEnded);
+    }
+  },[]);
+
+  const handleTimeUpdate = () => {
+    setCurrentTime(audioRef.current.currentTime);
+  };
+
+  const handleLoadedMetadata = () => {
+    setDuration(audioRef.current.duration);
+  };
+
+  const handleEnded = () => {
+    setCurrentTime(0);
+    setIsPlaying(false);
+  };
+
+  useEffect(() => {
+    if(isPlaying) {
+        audioRef.current.play();
+    } else {
+        audioRef.current.pause();
+    }
+  }, [isPlaying]);
+
+  useEffect(() => {
+    if(isMute) {
+        audioRef.current.volume = 1;
+        setVolume(1);
+    } else {
+        audioRef.current.volume = 0;
+        setVolume(0);
+    }
+  }, [isMute]);
 
   return (
     <div className="custom-audio-player">
       <img src={image} className="display-image-player" />
       <audio ref={audioRef} src={audioSrc} />
-      <p onClick={togglePlay}>{isPlaying ? <FaPause /> : <FaPlay />}</p>
+      <p className="audio-btn" onClick={togglePlay}>{isPlaying ? <FaPause /> : <FaPlay />}</p>
       <div className="duration-flex">
-        <p>0:00</p>
+        <p>{formatTime(currentTime)}</p>
       </div>
       <input
-        type="range"
+        type="range" 
+        max={duration}
+        value={currentTime}
         onChange={handleDuration}
+        step={0.01}
         className="duration-range"
       />
-      <p>-21:00</p>
-      <p onClick={toggleMute}>
+      <p>-{formatTime(duration - currentTime)}</p>
+      <p className="audio-btn" onClick={toggleMute}>
         {!isMute ? <FaVolumeUp /> : <FaVolumeMute />}
       </p>
       <input
-        type="range"
+        type="range" value={volume}
+        max={1}
+        min={0}
+        step={0.01}
         onChange={handleVolume}
         className="volume-range"
       />
