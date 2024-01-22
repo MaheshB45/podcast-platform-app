@@ -4,6 +4,7 @@ import { useState } from "react";
 import InputComponent from "../Common Components/Input/Input";
 import FileInput from "../Common Components/Input/FileInput";
 import Button from "../Common Components/Button/Button";
+import Loader from "../Common Components/Loader/Loader";
 import { toast } from "react-toastify";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { auth, db, storage } from "../../firebase";
@@ -109,7 +110,7 @@ const CreatePodcastForm = () => {
       />
 
       <Button
-        text={loading ? "Loading..." : "Create Podcast"}
+        text={loading ? <Loader /> : "Create Podcast"}
         disabled={loading}
         onClick={handleSubmit}
       />

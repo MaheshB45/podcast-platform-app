@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./AudioPlayer.css";
 //react-icons
-import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute } from "react-icons";
+//import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute } from "react-icons";
 
 // eslint-disable-next-line react/prop-types
 const AudioPlayer = ({ audioSrc, image }) => {

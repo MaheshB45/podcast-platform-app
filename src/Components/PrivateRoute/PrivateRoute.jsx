@@ -4,6 +4,8 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../firebase';
 // React router dom library
 import { Navigate ,Outlet } from 'react-router-dom';
+
+import Loader from '../Common Components/Loader/Loader';
 // React toastifu library
 //import {toast} from "react-toastify"
 
@@ -11,14 +13,14 @@ const PrivateRoute = () => {
     const [user, loading, error] = useAuthState(auth);
 
     if (loading){
-        return <p>Loading...</p>;
+        return <Loader />;
     }
-    if (!user || error) {
+    else if (!user || error) {
         //toast.error("Please Signup or Login");
-        return <Navigate to="/" replace></Navigate>;
+        return <Navigate to="/" replace />;
+    } else {
+        return <Outlet />;
     }
-    return <Outlet />;
-
 };
 
 export default PrivateRoute;

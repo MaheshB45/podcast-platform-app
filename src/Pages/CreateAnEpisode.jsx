@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import InputComponent from "../Components/Common Components/Input/Input";
 import FileInput from "../Components/Common Components/Input/FileInput";
 import Button from "../Components/Common Components/Button/Button";
+import Loader from "../Components/Common Components/Loader/Loader";
 import { toast } from "react-toastify";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { addDoc, collection } from "firebase/firestore";
@@ -92,7 +93,7 @@ const CreateAnEpisodePage = () => {
         />
 
         <Button
-          text={loading ? "Loading..." : "Create Episode"}
+          text={loading ? <Loader /> : "Create Episode"}
           disabled={loading}
           onClick={handleSubmit}
         />

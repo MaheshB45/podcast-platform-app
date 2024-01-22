@@ -1,6 +1,7 @@
 import { useState } from "react";
 import InputComponent from "../../Common Components/Input/Input";
 import Button from "../../Common Components/Button/Button";
+import Loader from "../../Common Components/Loader/Loader";
 import { doc, getDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../../firebase";
@@ -76,7 +77,7 @@ const LoginForm = () => {
       />
 
       <Button
-        text={loading ? "Loading..." : "Login"}
+        text={loading ? <Loader /> : "Login"}
         onClick={handleLogin}
         disabled={loading}
       />
